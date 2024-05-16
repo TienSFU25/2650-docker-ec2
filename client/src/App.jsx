@@ -10,10 +10,14 @@ function App() {
     try {
       const response = await fetch(`/api/foo`);
       const { value } = await response.json();
-
       setYay(value);
-    } catch (error) {}
+    } catch (error) {
+      console.log(`it blew up!`);
+      console.log(error);
+    }
   }
+
+  fetchData();
 
   return (
     <>

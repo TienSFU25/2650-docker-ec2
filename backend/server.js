@@ -37,6 +37,15 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+// Handle SIGTERM signal
+process.on("SIGTERM", () => {
+  console.log("SIGTERM signal received: closing HTTP server");
+  server.close(() => {
+    console.log("HTTP server closed");
+    process.exit(0);
+  });
+});
+
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
